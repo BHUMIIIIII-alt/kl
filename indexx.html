@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Devarji 🎂</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Comic Sans MS', 'Poppins', cursive;
+    background: linear-gradient(135deg, #ffdee9, #b5fffc);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slider {
+    width: 90%;
+    max-width: 420px;
+    background: #fff;
+    border-radius: 25px;
+    padding: 35px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    animation: popIn 1s ease;
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .slide {
+    display: none;
+  }
+
+  .slide.active {
+    display: block;
+  }
+
+  h1 {
+    color: #ff4d6d;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+  .cake {
+    font-size: 4rem;
+    animation: bounce 1.5s infinite;
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  button {
+    background: #ff4d6d;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(255,77,109,0.4);
+    transition: 0.3s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    background: #ff1f4a;
+  }
+
+  .signature {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #ff4d6d;
+  }
+
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    from { transform: translateY(-100px) rotate(0); }
+    to { transform: translateY(110vh) rotate(360deg); }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="slider">
+
+  <!-- SLIDE 1 -->
+  <div class="slide active">
+    <div class="cake">🎂</div>
+    <h1>Happy Birthday Devarji 💖</h1>
+    <p id="countdown">Counting down to your special day… ⏳</p>
+  </div>
+
+  <!-- SLIDE 2 -->
+  <div class="slide">
+    <h1>A Special Day 🌸</h1>
+    <p>
+      Today is not just another day —  
+      it’s a celebration of you and all the goodness  
+      you bring into everyone’s lives ✨
+    </p>
+  </div>
+
+  <!-- SLIDE 3 : YOUR MESSAGE -->
+  <div class="slide">
+    <h1>Heartfelt Wishes 💌</h1>
+    <p>
+      Happy Birthday Devarji!<br><br>
+      May your life be filled with good health, happiness, and success.<br><br>
+      May you always keep smiling and achieve everything you dream of.<br><br>
+      Have a wonderful year ahead! 🎂✨
+    </p>
+  </div>
+
+  <!-- SLIDE 4 -->
+  <div class="slide">
+    <h1>One Last Thing 🎉</h1>
+    <p>
+      May this year bring you peace, positivity,  
+      and many beautiful moments to cherish 💫  
+      Wishing you the very best, always.
+    </p>
+    <button onclick="surprise()">Click for a Surprise 🎁</button>
+  </div>
+
+  <!-- SLIDE 5 -->
+  <div class="slide">
+    <h1>With Love 💗</h1>
+    <p>
+      This little website is a small token  
+      of love and good wishes for you.  
+      Hope it brought a smile to your face 😊
+    </p>
+    <div class="signature">— From Bhumi 💖</div>
+  </div>
+
+  <div class="buttons">
+    <button onclick="prevSlide()">⬅ Back</button>
+    <button onclick="nextSlide()">Next ➡</button>
+  </div>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) {
+      currentSlide++;
+      showSlide(currentSlide);
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      showSlide(currentSlide);
+    }
+  }
+
+  function surprise() {
+    alert("🎉 Happy Birthday Devarji! 🎂✨\nWishing you health, happiness, and success always 💖");
+  }
+
+  // CONFETTI
+  for (let i = 0; i < 40; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    c.style.backgroundColor = `hsl(${Math.random()*360},100%,70%)`;
+    document.body.appendChild(c);
+  }
+
+  // COUNTDOWN — 4 FEB
+  const birthdayDate = new Date('2026-02-04T00:00:00').getTime();
+  const countdownEl = document.getElementById('countdown');
+
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = birthdayDate - now;
+
+    if (diff <= 0) {
+      countdownEl.innerHTML = "🎂 It's your Birthday Devarji! 🎉💖";
+      return;
+    }
+
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    countdownEl.innerHTML = `⏳ ${d}d ${h}h ${m}m ${s}s left`;
+  }, 1000);
+</script>
+
+</body>
+</html>
